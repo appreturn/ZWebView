@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -252,8 +253,11 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
 
         // 解决WebView与JavaScript混淆问题
 //        webView.addJavascriptInterface(new Object() {
+//
+//            @JavascriptInterface
 //            public void clickOnAndroid(String result) {
 //                Toast.makeText(WebViewActivity.this, result, Toast.LENGTH_LONG).show();
+//                // 执行相应的逻辑操作
 //            }
 //        }, "jsObj");
         webView.addJavascriptInterface(new JavaScriptMixUpEvent(this), "jsObj");
