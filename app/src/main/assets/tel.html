@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="theme-color" content="#2932e1">
+
+<title>爱书客</title>
+<style type="text/css">
+#hideElem {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+}
+#telElem {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	cursor: pointer;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <span id="hideElem">隐藏内容</span>
+    <a id="telElem" href="tel:10086" title="拨号10086">10086</a>
+</body>
+<script>
+	// 获取电话号码
+	function getTel() {
+		return document.getElementById('telElem').innerHTML;
+	};
+</script>
+</html>
+
