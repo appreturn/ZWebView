@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cc.ibooker.event.JavaScriptMixUpEvent;
 import cc.ibooker.utils.ClickUtil;
@@ -250,7 +251,12 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         webSettings.setJavaScriptEnabled(true);
 
         // 解决WebView与JavaScript混淆问题
-        webView.addJavascriptInterface(new JavaScriptMixUpEvent(), "jsObj");
+//        webView.addJavascriptInterface(new Object() {
+//            public void clickOnAndroid(String result) {
+//                Toast.makeText(WebViewActivity.this, result, Toast.LENGTH_LONG).show();
+//            }
+//        }, "jsObj");
+        webView.addJavascriptInterface(new JavaScriptMixUpEvent(this), "jsObj");
         // 隐藏滚动条
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
     }
@@ -292,21 +298,23 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
      * 重构Url
      */
     private void refactorUrlLoad(String url) {
-        // 将跳转url添加app_token-URL重构
-        if (!url.contains("app_token=")) {
-            if (url.contains("?") && url.contains("=")) {
-                weburl = url + "&app_token=" + app_token;
-                webView.loadUrl(weburl);
-            } else {
-                weburl = url + "?app_token=" + app_token;
-                webView.loadUrl(weburl);
-            }
-        } else {
-            // 跳转登录
-            Intent intent_login = new Intent(this, LoginActivity.class);
-            startActivity(intent_login);
-            finish();
-        }
+        webView.loadUrl(weburl);
+
+//        // 将跳转url添加app_token-URL重构
+//        if (!url.contains("app_token=")) {
+//            if (url.contains("?") && url.contains("=")) {
+//                weburl = url + "&app_token=" + app_token;
+//                webView.loadUrl(weburl);
+//            } else {
+//                weburl = url + "?app_token=" + app_token;
+//                webView.loadUrl(weburl);
+//            }
+//        } else {
+//            // 跳转登录
+//            Intent intent_login = new Intent(this, LoginActivity.class);
+//            startActivity(intent_login);
+//            finish();
+//        }
     }
 
 }
