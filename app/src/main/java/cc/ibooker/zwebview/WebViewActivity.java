@@ -79,6 +79,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
 
         // WebView默认是通过浏览器打开url，使用url在WebView中打开
         webView.setWebViewClient(new WebViewClient() {
+            // 旧版本
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // 返回false，意味着请求过程中，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理
@@ -99,6 +100,18 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 return true;
             }
+
+            // 新版本
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//                // 返回false，意味着请求过程中，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理
+//                // 返回true，说明你自己想根据url，做新的跳转，比如在判断url符合条件的情况下，我想让webView加载http://baidu.com/
+//                // 加载Url，使网页在WebView中打开
+//                if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP) {
+//                    webView.loadUrl(request.getUrl().toString());
+//                }
+//                return true;
+//            }
 
             // WebViewClient帮助WebView去处理页面控制和请求通知
             @Override
@@ -235,6 +248,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         // 允许加载JS
         webSettings.setJavaScriptEnabled(true);
+
         // 解决WebView与JavaScript混淆问题
         webView.addJavascriptInterface(new JavaScriptMixUpEvent(), "jsObj");
         // 隐藏滚动条
